@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_spacing">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/flights_avatar_size"
+            android:layout_height="@dimen/flights_avatar_size"
+            android:layout_marginBottom="@dimen/common_spacing"
+            android:contentDescription="@string/description_flight_avatar"
+            app:layout_constraintBottom_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src = "@drawable/ic_launcher_foreground"
+            tools:srcCompat="@sample/plane.json/data/planeAvatar" />
+
+        <TextView
+            android:id="@+id/fromCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:ellipsize="end"
+            android:singleLine="true"
+            app:layout_constraintBottom_toTopOf="@+id/toCity"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@sample/plane.json/data/startCity" />
+
+        <TextView
+            android:id="@+id/toCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:layout_marginBottom="@dimen/common_spacing"
+            app:layout_constraintBottom_toBottomOf="@id/header"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toBottomOf="@id/fromCity"
+            tools:text="@sample/plane.json/data/endCity" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="avatar,toCity" />
+
+        <ImageView
+            android:id="@+id/departImage"
+            android:layout_width="@dimen/depart_avatar_size"
+            android:layout_height="@dimen/depart_avatar_size"
+            android:layout_marginTop="@dimen/depart_spacing"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src = "@drawable/departure"
+            tools:srcCompat="@sample/plane.json/data/departAvatar" />
+
+        <TextView
+            android:id="@+id/departureDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingTop="@dimen/common_spacing"
+            android:paddingBottom="@dimen/common_spacing"
+            android:layout_marginLeft="@dimen/flight_margin_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/departImage"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            tools:text="@sample/plane.json/data/startDate" />
+        <ImageView
+            android:id="@+id/arrivalImage"
+            android:layout_width="@dimen/depart_avatar_size"
+            android:layout_height="@dimen/depart_avatar_size"
+            android:layout_marginTop="@dimen/depart_spacing"
+            app:layout_constraintTop_toBottomOf="@id/departureDate"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src = "@drawable/arrival"
+            tools:srcCompat="@sample/plane.json/data/arrivalAvatar" />
+
+        <TextView
+            android:id="@+id/arrivalDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingTop="@dimen/common_spacing"
+            android:paddingBottom="@dimen/common_spacing"
+            android:layout_marginLeft="@dimen/flight_margin_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/arrivalImage"
+            app:layout_constraintTop_toBottomOf="@id/departureDate"
+            tools:text="@sample/plane.json/data/endDate" />
+
+        <ImageView
+            android:id="@+id/priceImage"
+            android:layout_width="@dimen/price_avatar_size"
+            android:layout_height="@dimen/price_avatar_size"
+            android:layout_marginTop="@dimen/depart_spacing"
+            app:layout_constraintTop_toBottomOf="@id/arrivalDate"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src = "@drawable/price"
+            tools:srcCompat="@sample/plane.json/data/priceAvatar" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingTop="@dimen/common_spacing"
+            android:paddingBottom="@dimen/common_spacing"
+            android:layout_marginLeft="@dimen/flight_margin_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/arrivalImage"
+            app:layout_constraintTop_toBottomOf="@id/arrivalDate"
+            tools:text="@sample/plane.json/data/price" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="price" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:contentDescription="@string/description_post_like"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/footer"
+            app:icon="@drawable/ic_like_24dp"
+            tools:checked="@sample/plane.json/data/isLiked"
+            style="@style/Widget.AppTheme.LikeCheckBox"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            app:layout_constraintTop_toBottomOf="@id/like"
+            android:background="@color/ic_launcher_background"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

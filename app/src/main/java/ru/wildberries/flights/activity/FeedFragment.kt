@@ -1,6 +1,6 @@
 package ru.wildberries.flights.activity
 
-import android.content.Intent
+import ru.wildberries.flights.activity.ViewFlightFragment.Companion.id
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +11,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.wildberries.flights.R
 import ru.wildberries.flights.adapter.OnInteractionListener
-import ru.wildberries.flights.adapter.PostsAdapter
+import ru.wildberries.flights.adapter.FlightsAdapter
 import ru.wildberries.flights.databinding.FragmentFeedBinding
-import ru.wildberries.flights.dto.Post
-import ru.wildberries.flights.viewmodel.PostViewModel
+import ru.wildberries.flights.dto.Flight
+import ru.wildberries.flights.viewmodel.FlightViewModel
 
 class FeedFragment : Fragment() {
 
-    private val viewModel: PostViewModel by activityViewModels()
+    private val viewModel: FlightViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,45 +27,28 @@ class FeedFragment : Fragment() {
     ): View {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
-        val adapter = PostsAdapter(object : OnInteractionListener {
-            override fun onEdit(post: Post) {
-                viewModel.edit(post)
+        val adapter = FlightsAdapter(object : OnInteractionListener {
+            override fun onLike(flight: Flight) {
+                viewModel.likeById(flight.searchToken)
             }
-
-            override fun onLike(post: Post) {
-                viewModel.likeById(post.id)
-            }
-
-            override fun onRemove(post: Post) {
-                viewModel.removeById(post.id)
-            }
-
-            override fun onShare(post: Post) {
-                val intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, post.content)
-                    type = "text/plain"
-                }
-
-                val shareIntent =
-                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
-                startActivity(shareIntent)
+            override fun onView(flight: Flight) {
+                findNavController().navigate(R.id.action_feedFragment_to_viewFlightFragment,
+                    Bundle().apply {
+                        id = flight.searchToken
+                    }
+                )
             }
         })
         binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { state ->
-            adapter.submitList(state.posts)
+            adapter.submitList(state.flights)
             binding.progress.isVisible = state.loading
             binding.errorGroup.isVisible = state.error
             binding.emptyText.isVisible = state.empty
         }
 
         binding.retryButton.setOnClickListener {
-            viewModel.loadPosts()
-        }
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            viewModel.loadFlights()
         }
 
         return binding.root

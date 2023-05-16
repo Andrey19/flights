@@ -4,23 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
     app:startDestination="@id/feedFragment">
-
     <fragment
         android:id="@+id/feedFragment"
-        android:name="ru.netology.nmedia.activity.FeedFragment"
-        android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed">
+        android:name="ru.wildberries.flights.activity.FeedFragment"
+        android:label="FeedFragment" >
         <action
-            android:id="@+id/action_feedFragment_to_newPostFragment"
-            app:destination="@id/newPostFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_feedFragment_to_viewFlightFragment"
+            app:destination="@id/viewFlightFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newPostFragment"
-        android:name="ru.netology.nmedia.activity.NewPostFragment"
-        android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
+        android:id="@+id/viewFlightFragment"
+        android:name="ru.wildberries.flights.activity.ViewFlightFragment"
+        android:label="ViewFlightFragment" />
 </navigation>

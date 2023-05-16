@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "planeAvatar": "@sample/plane_avatars",
+      "priceAvatar": "@sample/price_avatar",
+      "arrivalAvatar": "@sample/arrival_avatar",
+      "departAvatar": "@sample/depart_avatar",
+      "searchToken": "12jkddjsdhj1",
+      "startCity": "Moscow",
+      "endCity": "Omsk",
+      "startLocationCode": "MSC",
+      "endLocationCode": "OMS",
+      "startDate": "01/01/2023 00:00",
+      "endDate": "01/02/2023 07:00",
+      "serviceClass": "ECONOMY",
+      "passengerType": "ADT",
+      "seats": "Seats:",
+      "count": 1,
+      "price": 2719,
+      "isLiked": false
+    }
+  ]
+}
+
